@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Task Runtime Log</h3>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <pre class="heighlight">{{ data }}</pre>
+    </div>
+  </div>
+  <div class="card-footer">
+    <input type="submit" value="{% if btn_name %}{{btn_name}}{% else %}Save{% endif %}" class="btn btn-primary"/>
+  </div>
+</div>
+{% endblock %}

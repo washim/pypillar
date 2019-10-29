@@ -1,0 +1,2 @@
+recursive-include pypillar/static *
+recursive-include pypillar/templates *

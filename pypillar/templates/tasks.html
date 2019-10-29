@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Tasks</h3>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Task ID</th>
+          <th>Task Name</th>
+          <th>Task Weight</th>
+          <th>Script</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if results|length > 0 %}
+      {% for row in results %}
+        <tr>
+          <td>{{ row.id }}</td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.weight }}</td>
+          <td>{{ row.script }}</td>
+          <td>
+            <div class="btn-group">
+              <a title="Task runtime logs" href="{{ url_for('runtime_log', tid=row.id) }}"><button type="button" class="btn btn-default btn-sm"><i class="fas fa-copy"></i></button></a>
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      {% else %}
+      <tr style="background-color:white;"><td colspan=5 align="center">No record found yet</td></tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

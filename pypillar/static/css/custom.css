@@ -1,0 +1,7 @@
+h1{font-weight: lighter;}
+form label{margin:0px;}
+.CodeMirror{border:1px solid #ccc;}
+.has-error label{color: #dd4b39;}
+.has-error .form-control{border-color: #dd4b39;box-shadow: none;}
+label[for="csrf_token"]{display:none;}
+pre.heighlight{background: #272822; color: #f8f8f2;}
