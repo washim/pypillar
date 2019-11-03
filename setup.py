@@ -19,7 +19,8 @@ setup(
     install_requires=[
         'Flask',
         'Flask-WTF',
-        'WTForms'
+        'WTForms',
+        'tinydb'
     ],
     entry_points={
         'console_scripts': [

@@ -1,88 +1,57 @@
 import subprocess
 import json
-import os
+import sys
 
 
 class Worker:
-    def __init__(self, tasks, original_input, request_id, task_input={}):
+    def __init__(self, tasks, post_data, request_id):
         self.tasks = tasks
-        self.original_input = original_input
+        self.post_data = post_data
         self.request_id = request_id
-        self.task_input = task_input
+        self.task_input = {}
         self.output = None
         self.error = {}
+        self.data = {}
         self.sys_error = False
 
     def run(self):
         for rule in self.tasks:
             try:
-                command = ['python', rule['script'], json.dumps(rule), self.original_input, self.request_id, self.task_input]
+                self.data['PYPILLAR_TASK_INFO'] = rule
+                self.data['PYPILLAR_POST_DATA_FILE'] = self.post_data
+                self.data['PYPILLAR_UNIQUE_REQUEST_ID'] = self.request_id
+                self.data['PYPILLAR_TASK_INPUT'] = self.task_input
+
+                command = [sys.executable, rule['script'], '--PYPILLAR', json.dumps(self.data)]
                 runtime_log = subprocess.check_output(command, stderr=subprocess.STDOUT, shell=True, universal_newlines=True)
-                with open(rule['runtime_log'], "w+") as outfile:
+
+                with open(rule['task_log_path'], "w+") as outfile:
                     outfile.write(runtime_log)
 
-                if runtime_log.find('PYPILLAR_TASK_INPUT') != -1:
-                    self.task_input = runtime_log.strip()
-                elif runtime_log.find('PYPILLAR_RESULT') != -1:
-                    self.output = runtime_log.strip()
-                    break
-                else:
-                    self.output = '{"PYPILLAR_RESULT":{}}'
+                try:
+                    runtime_log = json.loads(runtime_log)
+                    if runtime_log.get('PYPILLAR_TASK_INPUT'):
+                        self.data['PYPILLAR_TASK_INPUT'] = runtime_log['PYPILLAR_TASK_INPUT']
+                    if runtime_log.get('PYPILLAR_RESULT'):
+                        self.output = runtime_log
+                        break
+                except Exception:
+                    pass
 
             except subprocess.CalledProcessError as exc:
-                with open(rule['runtime_log'], "w+") as outfile:
+                with open(rule['task_log_path'], "w+") as outfile:
                     outfile.write(exc.output)
 
-                self.error['message'] = f'Task({rule["name"]}): Failed. Check task log for more info.'
+                self.error['error'] = f'Task({rule["name"]}): Failed. Check task log for more info.'
                 self.sys_error = True
                 break
 
         if self.sys_error:
             self.sys_error = False
-            return self.error
+            return json.dumps(self.error)
+
+        elif self.output:
+            return json.dumps(self.output)
+
         else:
-            return self.output
-
-class Tasks:
-    def __init__(self, path):
-        self.path = path
-        self.all_data = []
-
-    def GetAllTasks(self, project_id=None):
-        if os.path.exists(self.path) == False:
-            with open(self.path, 'w+') as outfile:
-                outfile.write('[]')
-
-        with open(self.path) as outfile:
-            all_data = json.load(outfile)
-
-        if project_id:
-            all_data = list(filter(lambda item: item['pid'] == project_id, all_data))
-
-        self.all_data = sorted(all_data, key=lambda i: i['weight'])
-
-    def AddTask(self, record):
-        self.GetAllTasks()
-        self.all_data.append(record)
-        with open(self.path, 'w+') as outfile:
-            json.dump(self.all_data, outfile)
-
-
-class Pojects:
-    def __init__(self, path):
-        self.path = path
-        self.all_data = []
-
-    def GetAllProjects(self):
-        if os.path.exists(self.path) == False:
-            with open(self.path, 'w+') as outfile:
-                outfile.write('[]')
-
-        with open(self.path) as outfile:
-            self.all_data = json.load(outfile)
-
-    def AddProject(self, record):
-        self.GetAllProjects()
-        self.all_data.append(record)
-        with open(self.path, 'w+') as outfile:
-            json.dump(self.all_data, outfile)
+            return json.dumps({"PYPILLAR_RESULT": {}})

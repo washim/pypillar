@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">All Requests</h3>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Created</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if results|length > 0 %}
+      {% for row in results %}
+        <tr>
+          <td>{{ row.request_id }}</td>
+          <td>{{ row.timestamp }}</td>
+          <td>
+            <a title="View" href="{{ url_for('history', pid=params.pid, type=params.type, action='view', id=row.request_id) }}"><small class="badge badge-secondary"><i class="far fa-eye"></i></small></a>
+            <a title="Delete" href="{{ url_for('history', pid=params.pid, type=params.type, action='delete', id=row.request_id) }}"><small class="badge badge-secondary"><i class="fas fa-trash"></i></small></a>
+          </td>
+        </tr>
+      {% endfor %}
+      {% else %}
+      <tr><td colspan=3 align="center">No record found yet</td></tr>
+      {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

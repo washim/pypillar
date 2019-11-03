@@ -25,9 +25,9 @@
           <td>{{ row.weight }}</td>
           <td>{{ row.script }}</td>
           <td>
-            <div class="btn-group">
-              <a title="Task runtime logs" href="{{ url_for('runtime_log', tid=row.id) }}"><button type="button" class="btn btn-default btn-sm"><i class="fas fa-copy"></i></button></a>
-            </div>
+            <a title="Edit" href="{{ url_for('create_task', pid=row.pid, action='edit', id=row.id) }}"><small class="badge badge-secondary"><i class="far fa-edit"></i></small></a>
+            <a title="Task runtime logs" href="{{ url_for('task_log', tid=row.id) }}"><small class="badge badge-secondary"><i class="fas fa-copy"></i></small></a>
+            <a title="Code Editor" href="{{ url_for('editor', file=row.script) }}"><small class="badge badge-secondary"><i class="fab fa-python"></i></small></a>
           </td>
         </tr>
       {% endfor %}

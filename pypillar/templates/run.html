@@ -10,7 +10,7 @@
       <div class="card-body">
         <div class="form-group">
           <label>Api Endpoint</label>
-          <pre class="heighlight">{{ request.host_url }}api?projectid={{ request.args.get('pid') }}</pre>
+          <pre class="heighlight">{{ request.host_url }}api/{{ pid }}</pre>
         </div>
         <div class="form-group">
           <label>Api Method</label>
@@ -43,13 +43,18 @@
   </div>
 </div>
 <script type=text/javascript>
-  api_endpoint = '{{ request.host_url }}api?projectid={{ request.args.get('pid') }}';
+  api_endpoint = '{{ request.host_url }}api/{{ pid }}';
   $(function() {
     $('.btn-post').bind('click', function() {
       $('.btn-post').attr('disabled', true);
       $('#api_output').html('<i class="fas fa-sync fa-spin"></i> Please wait...');
-      $.post(api_endpoint, $('.input').val()).done(function(data){
-        $('#api_output').text(JSON.stringify(JSON.parse(data), null, 4));
+      $.post(api_endpoint, $('#input').val()).done(function(data){
+        try {
+          $('#api_output').text(JSON.stringify(JSON.parse(data), null, 4));
+        }
+        catch(e) {
+          $('#api_output').text(JSON.stringify(data, null, 4));
+        }
         $('.btn-post').removeAttr('disabled');
       });
       return false;

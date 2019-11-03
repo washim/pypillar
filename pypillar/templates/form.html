@@ -22,4 +22,15 @@
     </div>
   </form>
 </div>
+<script>
+  $(function() {
+    if ($('#code_editor').length) {
+      $('.card-body').removeClass('col-md-6');
+      var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('code_editor'), {
+          lineNumbers: true,
+          matchBrackets: true
+      });
+    }
+  });
+</script>
 {% endblock %}
