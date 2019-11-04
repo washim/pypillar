@@ -91,4 +91,5 @@ Some Screenshot
 =====================================
 
 Create project
+
 .. image:: create_project.png
