@@ -18,3 +18,19 @@ This is an open source REST tool which allow to run any python script as a distr
 #. Create multiple projects.
 #. Live code editor which allow to change code associated with task.
 #. Quickly and easily run REST to test the REST api.
+
+Installation
+=====================================
+.. code-block:: shell
+
+    pip install pypillar
+
+Start Server
+=====================================
+To start PyPillar server run below command in terminal
+
+.. code-block:: shell
+
+    pypillar run
+
+It will expose the server in http://localhost:5000
