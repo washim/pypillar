@@ -19,10 +19,3 @@ This is an open source REST tool which allow to run any python script as a distr
 #. Live code editor which allow to change code associated with task.
 #. Live code editor which allow to change code associated with task.
 #. Quickly and easily run REST to test the REST api.
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
