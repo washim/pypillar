@@ -12,7 +12,7 @@ from tinydb import TinyDB, where, Query
 from pypillar.common import Worker
 from datetime import datetime
 
-__version__ = '0.0.1'
+__version__ = '0.0.3'
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)

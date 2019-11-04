@@ -1,7 +1,14 @@
 import subprocess
 import json
 import sys
+import argparse
 
+
+def runtime_objects():
+    parser = argparse.ArgumentParser(description='Pypillar argument processing')
+    parser.add_argument('--PYPILLAR', help='Variable which contain all pypillar objects for future references.')
+    args = parser.parse_args()
+    return json.loads(args.PYPILLAR)
 
 class Worker:
     def __init__(self, tasks, post_data, request_id):
