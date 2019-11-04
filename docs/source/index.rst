@@ -66,17 +66,10 @@ Suppose you want to pass transformed input from Task1 to Task2 and finnaly you w
 
    # Task2 python script
    import json
-   import argparse
-
-   parser = argparse.ArgumentParser(description='PyPillar argument processing')
-   parser.add_argument('--PYPILLAR', help='Variable which contain all pypillar objects for future references.')
-   args = parser.parse_args()
-
-   pypillar = json.loads(args.PYPILLAR)
-
+   from pypillar.common import runtime_objects
+   pypillar = runtime_objects()
    output = {}
    output['PYPILLAR_RESULT'] = pypillar['PYPILLAR_TASK_INPUT'] + ' World'
-
    print(json.dumps(output))
 
 It will give following result
