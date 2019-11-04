@@ -31,7 +31,7 @@ class Worker:
                 try:
                     runtime_log = json.loads(runtime_log)
                     if runtime_log.get('PYPILLAR_TASK_INPUT'):
-                        self.data['PYPILLAR_TASK_INPUT'] = runtime_log['PYPILLAR_TASK_INPUT']
+                        self.task_input = runtime_log['PYPILLAR_TASK_INPUT']
                     if runtime_log.get('PYPILLAR_RESULT'):
                         self.output = runtime_log
                         break

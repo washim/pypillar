@@ -49,3 +49,40 @@ To get PyPillar runtime objects inside your task python script include below cod
 
    pypillar = json.loads(args.PYPILLAR) # This variable contaion all the information
    print(json.dumps(pypillar)) # Dump the variable and debug in PyPillar Task logger.
+
+PyPillar Runtime Task Input
+=====================================
+Suppose you want to pass transformed input from Task1 to Task2 below is the example
+
+.. code-block:: python
+
+   # Task1 python script
+   import json
+   var = {}
+   var['PYPILLAR_TASK_INPUT'] = 'Hello'
+   print(json.dumps(var))
+
+.. code-block:: python
+
+   # Task2 python script
+   import json
+   import argparse
+
+   parser = argparse.ArgumentParser(description='Pypillar argument processing')
+   parser.add_argument('--PYPILLAR', help='Variable which contain all pypillar objects for future references.')
+   args = parser.parse_args()
+
+   pypillar = json.loads(args.PYPILLAR)
+
+   output = {}
+   output['PYPILLAR_RESULT'] = pypillar['PYPILLAR_TASK_INPUT'] + ' World'
+
+   print(json.dumps(output))
+
+It will give folowing result
+
+.. code-block:: json
+
+   {
+      "PYPILLAR_RESULT": "Hello World"
+   }
