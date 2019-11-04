@@ -91,3 +91,13 @@ Some Screenshot
 =====================================
 
 .. image:: create_project.png
+
+.. image:: create_task.png
+
+.. image:: task_log.png
+
+.. image:: code_editor.png
+
+.. image:: run.png
+
+.. image:: request.png
