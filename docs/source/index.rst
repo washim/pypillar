@@ -52,7 +52,7 @@ To get PyPillar runtime objects inside your task python script include below cod
 
 PyPillar Runtime Task Input
 =====================================
-Suppose you want to pass transformed input from Task1 to Task2 below is the example
+Suppose you want to pass transformed input from Task1 to Task2 and finnaly you want result then below is the example.
 
 .. code-block:: python
 
@@ -68,7 +68,7 @@ Suppose you want to pass transformed input from Task1 to Task2 below is the exam
    import json
    import argparse
 
-   parser = argparse.ArgumentParser(description='Pypillar argument processing')
+   parser = argparse.ArgumentParser(description='PyPillar argument processing')
    parser.add_argument('--PYPILLAR', help='Variable which contain all pypillar objects for future references.')
    args = parser.parse_args()
 
@@ -79,10 +79,16 @@ Suppose you want to pass transformed input from Task1 to Task2 below is the exam
 
    print(json.dumps(output))
 
-It will give folowing result
+It will give following result
 
 .. code-block:: json
 
    {
       "PYPILLAR_RESULT": "Hello World"
    }
+
+Some Screenshot
+=====================================
+
+Create project
+.. image:: create_project.png
