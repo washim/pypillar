@@ -90,6 +90,4 @@ It will give following result
 Some Screenshot
 =====================================
 
-Create project
-
 .. image:: create_project.png
