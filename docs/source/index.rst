@@ -34,25 +34,9 @@ To start PyPillar server run below command in terminal
 
 It will expose the server in http://localhost:5000
 
-PyPillar Runtime Objects
-=====================================
-To get PyPillar runtime objects inside your task python script include below code snippets just beginning of your python script.
-
-.. code-block:: python
-
-   import json
-   import argparse
-
-   parser = argparse.ArgumentParser(description='Pypillar argument processing')
-   parser.add_argument('--PYPILLAR', help='Variable which contain all pypillar objects for future references.')
-   args = parser.parse_args()
-
-   pypillar = json.loads(args.PYPILLAR) # This variable contaion all the information
-   print(json.dumps(pypillar)) # Dump the variable and debug in PyPillar Task logger.
-
 PyPillar Runtime Task Input
 =====================================
-Suppose you want to pass transformed input from Task1 to Task2 and finnaly you want result then below is the example.
+Suppose you want to pass transformed input from Task1 to Task2 and finally you want result then below is the example.
 
 .. code-block:: python
 
