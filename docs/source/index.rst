@@ -17,5 +17,4 @@ This is an open source REST tool which allow to run any python script as a distr
 #. Investigate requests history in future at any point of time.
 #. Create multiple projects.
 #. Live code editor which allow to change code associated with task.
-#. Live code editor which allow to change code associated with task.
 #. Quickly and easily run REST to test the REST api.
