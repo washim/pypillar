@@ -30,6 +30,7 @@ Start Server
 To start PyPillar server run below command in terminal
 
 .. code-block:: shell
+
    pypillar run
 
 It will expose the server in http://localhost:5000
@@ -38,7 +39,7 @@ PyPillar Runtime Task Input
 =====================================
 Suppose you want to pass transformed input from Task1 to Task2 and finally you want result then below is the example.
 
-.. code-block:: python
+.. code-block:: shell
 
    # Task1 python script
    import json
@@ -46,7 +47,7 @@ Suppose you want to pass transformed input from Task1 to Task2 and finally you w
    var['PYPILLAR_TASK_INPUT'] = 'Hello'
    print(json.dumps(var))
 
-.. code-block:: python
+.. code-block:: shell
 
    # Task2 python script
    import json
@@ -58,7 +59,7 @@ Suppose you want to pass transformed input from Task1 to Task2 and finally you w
 
 It will give following result
 
-.. code-block:: json
+.. code-block:: shell
 
    {
       "PYPILLAR_RESULT": "Hello World"
