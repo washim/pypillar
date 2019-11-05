@@ -2,10 +2,6 @@ Welcome to PyPillar's documentation!
 ====================================
 This is an open source REST tool which allow to run any python script as a distributed task to monitor its all events during execution.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
 Why PyPillar
 ====================================
 This is an open source REST tool which allow to run any python script as a distributed task to monitor its all events during execution.
